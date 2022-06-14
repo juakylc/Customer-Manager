@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>SISTEMA EVERIS - CLIENTES</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	</head>
+	<body class="card-body">
+		<div class="card text-white bg-dark mb-3">
+		  	<div class="card-header">Clientes</div>
+			<div class="card-body">
+				<table class="table table-striped table-dark">
+					<thead class="thead-light">
+						<tr>
+							<th scope="col">ID del cliente</th>
+							<th scope="col">Nombre</th>
+							<th scope="col">Apellido 1</th>
+							<th scope="col">Apellido 2</th>
+							<th scope="col" th:hidden="${btnDropCustomersEnabled}">Eliminar</th>
+						</tr>
+					</thead>
+					<tbody>
+						<th:block th:each="customer : ${customersListView}">
+							<tr>
+								<td scope="row" th:text="${customer.customerId}" />
+								<td scope="row" th:text="${customer.name}" />
+								<td scope="row" th:text="${customer.firstSurname}" />
+								<td scope="row" th:text="${customer.secondSurname}" />
+								<td scope="row" th:hidden="${btnDropCustomerEnabled}">
+									<form action="actDropCustomer" method="post">
+										<button th:disabled="${btnDropCustomerEnabled}" type="submit"
+											id="btnDropCustomer" name="customerId" th:value="${customer.customerId}"
+											class="btn btn-danger">▼</button>
+									</form>
+								</td>
+							</tr>
+						</th:block>
+					</tbody>
+				</table>
+				<a class="btn btn-primary" th:href="@{index}" id="aBtnReturn" role="button">Volver</a>
+			</div>
+		</div>
+	</body>
+</html>
